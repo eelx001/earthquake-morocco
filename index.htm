@@ -1,117 +1,173 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/ea245733b7.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <link rel="icon" type="" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Flag_of_Morocco.svg/45px-Flag_of_Morocco.svg.png"/>
-    <title>Earthquake Information for Morocco</title>
-</head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #fcfcfc;
-    }
-    table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-    th, td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-    }
-    th {
-        background-color: #f2f2f2;
-    }
-</style>
-<body>
-    
-   <h1>Les plus grands tremblements de terre au | Maroc <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Flag_of_Morocco.svg/45px-Flag_of_Morocco.svg.png" alt="" srcset=""></h1><br>
-    <h3 id="datetimes"></h3>
-    <h3 id="countdown"></h3>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Location&nbsp;&nbsp;<i class="fa-solid fa-location-dot"></i></th>
-                <th>ordre de grandeur&nbsp;&nbsp;<i class="fa-solid fa-house-crack"></i></th>
-                <th>Date et heure&nbsp;&nbsp;<i class="fa-solid fa-calendar-days"></i></th>
-                <th>Mis à jour&nbsp;&nbsp;<i class="fa-solid fa-triangle-exclamation"></i></th>
-            </tr>
-        </thead>
-        <tbody id="earthquakeData">
-            <!-- Data will be dynamically inserted here -->
-        </tbody>
-    </table>
-<br>
-<ul>
-    <li><b>S'abaisser, se Couvrir et S'accrocher:</b></li>
-    <p>Si vous êtes à l'intérieur pendant un tremblement de terre, abaissez-vous au sol, couvrez-vous sous un meuble solide et accrochez-vous jusqu'à ce que les secousses s'arrêtent. Protégez votre tête et votre cou.</p>
-    <li><b>Restez à l'Intérieur:</b></li>
-    <p>Si vous êtes à l'intérieur, restez-y. Ne courez pas à l'extérieur pendant le tremblement de terre, car des débris en chute peuvent être dangereux.</p>
-    <li><b>Éloignez-vous des Fenêtres et des Objets Lourds:</b></li>
-    <p>Évitez de rester près des fenêtres, du verre ou d'objets lourds qui pourraient se briser ou tomber pendant un tremblement de terre.</p>
-    <li><b>Si Vous Conduisez, Garez-vous en Lieu Sûr:</b></li>
-    <p>Si vous conduisez, garez-vous dans un endroit sûr, loin des bâtiments, des arbres et des passerelles. Restez à l'intérieur de votre véhicule jusqu'à ce que les secousses s'arrêtent.</p>
-</ul>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/ea245733b7.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <link rel="icon" type="" href="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Flag_of_Morocco.svg/45px-Flag_of_Morocco.svg.png"/>
+        <title>Earthquake Information for Morocco</title>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C3PSM3VHY"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    <script>
-
-        // Create a new Date object to get the current date and time
-        const currentDate = new Date();
-        
-        // Get the UTC time in milliseconds
-        const utcTime = currentDate.getTime();
-        
-        // Define the time offset for Morocco (WET in standard time, WEST in summer time)
-        const moroccoTimeOffset = 0; // For Western European Time (WET), adjust if needed
-        
-        // Calculate the time in Morocco by adding the offset in milliseconds
-        const moroccoTime = new Date(utcTime + (moroccoTimeOffset * 3600000)); // 1 hour = 3600000 millisecondsco
-        
-        // Extract the date and time components in Morocco time
-        const moroccoDate = moroccoTime.toISOString().split('T')[0];
-        const moroccoTimeStr = moroccoTime.toTimeString().split(' ')[0];
-        
-        document.getElementById('datetimes').textContent = ` Dernière Actualisation : ${moroccoDate} ${moroccoTimeStr}` ;
-        
-        
-        const countdownDuration = 20;
-        
-        let timeRemaining = countdownDuration;
-
-        function updateCountdown() {
-            // Calculate minutes and seconds
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-
-            // Display the countdown
-            const countdownElement = document.getElementById('countdown');
-            countdownElement.textContent = `rafraîchir après: ${seconds.toString().padStart(2, '0')}`;
-
-            // Decrease the time remaining
-            timeRemaining--;
-
-            // Check if the countdown has reached zero
-            if (timeRemaining < 0) {
-                clearInterval(interval); // Stop the countdown when it reaches zero
-                countdownElement.textContent = 'Time\'s up!';
+        gtag('config', 'G-9C3PSM3VHY');
+        </script>
+    </head>
+    <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #fcfcfc;
+                
             }
-        }
+            .container{
+                margin: 10px;
+                
+            }
+            h1 {
+                
+                padding: 10px;
+            }
+            
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            
+            th {
+                background-color: #f2f2f2;
+            }
+            
+            ul {
+                padding: 0;
+                margin: 10px;
+            }
+            
+            li {
+                margin-bottom: 10px;
+            }
 
-        // Initial update of the countdown
-        updateCountdown();
+            @media screen and (max-width: 768px) {
+                table {
+                    font-size: 14px;
+                }
+            }
 
-        // Update the countdown every second (1000 milliseconds)
-        const interval = setInterval(updateCountdown, 1000);
+            @media screen and (max-width: 576px) {
+                h1 {
+                    font-size: 24px;
+                }
+            }
+        </style>
+    <body>
+    <h1>Les plus grands tremblements de terre au | Maroc <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Flag_of_Morocco.svg/45px-Flag_of_Morocco.svg.png" alt="" srcset=""></h1>
+    <div class="container">
+    <h3 id="datetimes"></h3>
+        <h3 id="countdown"></h3>
         
+        <table>
+            <thead>
+                <tr>
+                    <th>Location&nbsp;&nbsp;<i class="fa-solid fa-location-dot"></i></th>
+                    <th>ordre de grandeur&nbsp;&nbsp;<i class="fa-solid fa-triangle-exclamation"></i></th>
+                    <th>Date et heure&nbsp;&nbsp;<i class="fa-solid fa-calendar-days"></i></th>
+                    <th>Mis à jour&nbsp;&nbsp;<i class="fa-solid fa-clock"></i></i></th>
+                </tr>
+            </thead>
+            <tbody id="earthquakeData">
+                <!-- Data will be dynamically inserted here -->
+            </tbody>
+        </table>
         
-        
-        
-        
-        </script>   
-   <script src="./script.js"></script>
-</body>
-</html>
+    <h2>Lieux nécessitant une assistance en cas de tremblement de terre</h2>
+
+    <iframe src="https://www.google.com/maps/d/u/0/embed?mid=16sOZnEz9SoCU5gYQQTwAGIMToSlPYUc&ll=30.6218317203011%2C-7.1747122999999995&z=7" width="100%" height="500"></iframe>
+
+
+
+
+
+
+
+
+
+
+    <br>
+    <ul>
+        <li><b>S'abaisser, se Couvrir et S'accrocher:</b></li>
+        <p>Si vous êtes à l'intérieur pendant un tremblement de terre, abaissez-vous au sol, couvrez-vous sous un meuble solide et accrochez-vous jusqu'à ce que les secousses s'arrêtent. Protégez votre tête et votre cou.</p>
+        <li><b>Restez à l'Intérieur:</b></li>
+        <p>Si vous êtes à l'intérieur, restez-y. Ne courez pas à l'extérieur pendant le tremblement de terre, car des débris en chute peuvent être dangereux.</p>
+        <li><b>Éloignez-vous des Fenêtres et des Objets Lourds:</b></li>
+        <p>Évitez de rester près des fenêtres, du verre ou d'objets lourds qui pourraient se briser ou tomber pendant un tremblement de terre.</p>
+        <li><b>Si Vous Conduisez, Garez-vous en Lieu Sûr:</b></li>
+        <p>Si vous conduisez, garez-vous dans un endroit sûr, loin des bâtiments, des arbres et des passerelles. Restez à l'intérieur de votre véhicule jusqu'à ce que les secousses s'arrêtent.</p>
+    </ul>
+    </div>
+        <script>
+
+            // Create a new Date object to get the current date and time
+            const currentDate = new Date();
+            
+            // Get the UTC time in milliseconds
+            const utcTime = currentDate.getTime();
+            
+            // Define the time offset for Morocco (WET in standard time, WEST in summer time)
+            const moroccoTimeOffset = 0; // For Western European Time (WET), adjust if needed
+            
+            // Calculate the time in Morocco by adding the offset in milliseconds
+            const moroccoTime = new Date(utcTime + (moroccoTimeOffset * 3600000)); // 1 hour = 3600000 millisecondsco
+            
+            // Extract the date and time components in Morocco time
+            const moroccoDate = moroccoTime.toISOString().split('T')[0];
+            const moroccoTimeStr = moroccoTime.toTimeString().split(' ')[0];
+            
+            document.getElementById('datetimes').textContent = ` Dernière Actualisation : ${moroccoDate} ${moroccoTimeStr}` ;
+            
+            
+            const countdownDuration = 0;
+            
+            let timeRemaining = countdownDuration;
+
+            function updateCountdown() {
+                // Calculate minutes and seconds
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+
+                // Display the countdown
+                const countdownElement = document.getElementById('countdown');
+                countdownElement.textContent = `rafraîchir après: ${seconds.toString().padStart(2, '0')}`;
+
+                // Decrease the time remaining
+                timeRemaining--;
+
+                // Check if the countdown has reached zero
+                if (timeRemaining < 0) {
+                    clearInterval(interval); // Stop the countdown when it reaches zero
+                    countdownElement.textContent = 'Time\'s up!';
+                }
+            }
+
+            // Initial update of the countdown
+            updateCountdown();
+
+            // Update the countdown every second (1000 milliseconds)
+            const interval = setInterval(updateCountdown, 1000);
+            
+            
+            
+            
+            
+            </script>   
+    <script src="./script.js"></script>
+    </body>
+    </html>

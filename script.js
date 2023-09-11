@@ -4,7 +4,7 @@ async function fetchEarthquakeData() {
             params: {
                 format: 'geojson',
                 starttime: '2023-09-01',
-                minmagnitude: 1.0,
+                minmagnitude: 4.0,
                 maxlatitude: 35.9225, // Adjusted max latitude for Morocco
                 minlatitude: 27.6634, // Adjusted min latitude for Morocco
                 maxlongitude: -0.9987,
@@ -38,8 +38,8 @@ async function fetchEarthquakeData() {
 // Call the function to fetch earthquake data when the page loads
 fetchEarthquakeData();
 
-setTimeout(function () {
-    location.reload();
-}, 20000); 
+// setTimeout(function () {
+//     location.reload();
+// }, 120000); 
 
 
